@@ -1,1 +1,26 @@
 public/*
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+credentials
+*.pem
+*.ppk
+*.p12
+*.pfx
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+
+# Local tooling/cache
+node_modules/
+.hugo_build.lock
+.DS_Store
+Thumbs.db
+
+# Terraform/state files, if any are created later
+*.tfstate
+*.tfstate.*
+.terraform/

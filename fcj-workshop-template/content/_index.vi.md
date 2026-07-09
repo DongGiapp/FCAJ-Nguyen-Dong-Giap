@@ -7,25 +7,25 @@ chapter: false
 
 # Báo cáo thực tập
 ### Thông tin sinh viên:
-&emsp; **Họ và tên:** Nguyễn Văn A
+&emsp; **Full Name:** Nguyễn Đông Giáp
 
-&emsp; **Số điện thoại:** 0989888999
+&emsp; **Phone Number:** 0399005730 
 
-&emsp; **Email:** Anguyenvan@gmail.com
+&emsp; **Email:** nguyendonggiappro@gmail.com
 
-&emsp; **Trường:** Đại học Sư phạm Kỹ thuật TP.HCM
+&emsp; **University:** Đại học Công nghệ TP.HCM (HUTECH)
 
-&emsp; **Ngành:** Công nghệ thông tin
+&emsp; **Major:** Information Technology
 
-&emsp; **Lớp:** AWS082025
+&emsp; **Class:** 22DTHC2
 
-&emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Vietnam
+&emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
 
-&emsp; **Vị trí thực tập:** FCJ Cloud Intern
+&emsp; **Internship Position:** Cloud Engineer Intern
 
-&emsp; **Thời gian thực tập:** Từ ngày 12/08/2025 đến ngày 12/11/2025
+&emsp; **Internship Duration:** From 17/04/2026 to 10/07/2026
 
-![Ảnh đại diện của bạn](/images/avatar.png)
+![Ảnh đại diện của bạn](/images/avatar.jpg)
 
 
 

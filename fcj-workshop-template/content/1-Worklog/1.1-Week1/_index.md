@@ -1,57 +1,30 @@
 ---
-title: "Week 1 Worklog"
+title: "Worklog Tuần 1"
 date: 2024-01-01
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Mục tiêu tuần 1:
 
-### Week 1 Objectives:
+* Làm quen mentor, anh chị FCJ và nắm nội quy thực tập.
+* Tạo được AWS account và hiểu IAM là gì (dù chưa thạo lắm).
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+### Các công việc cần triển khai trong tuần này:
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Buổi đầu vào FCJ, làm quen mọi người trong nhóm <br> - Đọc hướng dẫn báo cáo và cách nộp worklog trên LMS | 20/04/2026 | 20/04/2026 | |
+| 3 | - Học *Creating Your First AWS Account* trên Cloud Journey <br> - Tạo AWS account, bật MFA (lúc đầu em bị kẹt ở bước xác minh thẻ) | 21/04/2026 | 21/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Học *Managing Costs with AWS Budgets* và *Getting Help with AWS Support* <br> - Tạo budget 10 USD để tránh bị charge ngoài ý muốn | 22/04/2026 | 22/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5 | - Học *Access Management with IAM* <br> - Thử tạo IAM user, gắn policy — ban đầu em nhầm giữa root account và IAM user | 23/04/2026 | 23/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 6 | - Ôn lại IAM, ghi chú các khái niệm: user, group, role, policy <br> - Bắt đầu clone template báo cáo Hugo về máy | 24/04/2026 | 24/04/2026 | |
 
+### Kết quả đạt được tuần 1:
 
-### Week 1 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Đã tạo AWS account và bật MFA thành công.
+* Biết cách tạo Budget để theo dõi chi phí (em set cảnh báo 80% ngưỡng budget).
+* Hiểu sơ bộ IAM: không nên dùng root account hằng ngày, nên tạo IAM user riêng.
+* Cài được Hugo trên máy và chạy được trang báo cáo local — lúc đầu em không biết Hugo là gì, phải hỏi và xem tutorial.
+* Còn nhiều thuật ngữ AWS chưa quen, nhưng em đã có nền để học tiếp tuần sau.

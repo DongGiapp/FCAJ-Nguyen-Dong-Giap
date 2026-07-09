@@ -1,57 +1,30 @@
 ---
-title: "Week 7 Worklog"
+title: "Worklog Tuần 7"
 date: 2024-01-01
-weight: 1
+weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Mục tiêu tuần 7:
 
-### Week 7 Objectives:
+* Code các Lambda function CRUD — tuần em "vật lộn" với code nhiều nhất.
+* Áp dụng DynamoDB single-table design vào thực tế.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+### Các công việc cần triển khai trong tuần này:
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Học *Building Serverless CRUD with Lambda and DynamoDB* <br> - Làm theo lab, so sánh với code nhóm | 01/06/2026 | 01/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - Code `createWorkflow.ts`: nhận JSON, ghi DynamoDB <br> - Em quên parse body từ API Gateway, debug mất nửa buổi | 02/06/2026 | 02/06/2026 | <https://github.com/cheduc1234/duan> |
+| 4 | - Code `getTodos.ts`: query theo `PK = USER#<userId>` <br> - Tìm hiểu DocumentClient của AWS SDK v3 | 03/06/2026 | 03/06/2026 | |
+| 5 | - Code `updateTodo.ts` và `deleteTodo.ts` <br> - Xử lý trả về status code 404 khi không tìm thấy item | 04/06/2026 | 04/06/2026 | |
+| 6 | - Test thủ công bằng curl trên SAM local <br> - Push code lên GitHub, tạo PR cho nhóm review | 05/06/2026 | 05/06/2026 | |
 
+### Kết quả đạt được tuần 7:
 
-### Week 7 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Hoàn thành 4 Lambda CRUD cơ bản — em tự tin hơn với TypeScript.
+* Hiểu cách DynamoDB lưu item với `pk` và `sk` thay vì bảng SQL quen thuộc.
+* Biết đọc log Lambda để debug (console.log + CloudWatch sau này).
+* Gặp nhiều lỗi nhỏ (parse body, CORS) nhưng mỗi lỗi em học được thêm.
+* API chạy được local — milestone quan trọng với em.

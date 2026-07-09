@@ -5,122 +5,88 @@ weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
+**Bài gốc (tiếng Anh):** [Stop Paying for Every Token: Amazon Bedrock Intelligent Prompt Routing](https://towardsaws.com/stop-paying-for-every-token-amazon-bedrock-intelligent-prompt-routing-f01d81a7e18f)  
+**Tác giả:** Gerardo Arroyo (AWS Community Builder)  
+**Người dịch:** Nguyễn Đông Giáp
 
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
+# Tối ưu hóa chi phí vận hành LLM qua cơ chế Định tuyến Prompt Thông minh (Intelligent Prompt Routing)
 
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, *“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”*, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
+Một "bẫy chi phí" phổ biến mà nhiều team AI gặp phải khi đưa hệ thống lên production là chiến lược **Một Mô Hình Duy Nhất (Single-Model Approach)**. Việc sử dụng các mô hình lớp trên (như Claude 3.5 Sonnet) cho mọi tác vụ — từ câu hỏi định nghĩa đơn giản đến phân tích kiến trúc phức tạp — đang tạo ra sự lãng phí tài nguyên biên rất lớn.
 
----
+Để giải quyết bài toán mất cân bằng này, giải pháp **Intelligent Prompt Routing** trên Amazon Bedrock cung cấp một cách tiếp cận mang tính hệ thống dựa trên việc phân phối tải động theo thời gian thực. Dưới đây là phân tích chi tiết về cơ chế, hiệu quả định lượng và góc nhìn ứng dụng cho các Model Agent.
 
-## Hướng dẫn kiến trúc
-
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
-
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
-
-**Kiến trúc giải pháp bây giờ như sau:**
-
-> *Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt.*
+![Intelligent Prompt Routing - How Routing Works](/images/3-BlogsTranslated/3.1-Blog1/intelligent-prompt-routing.png)
 
 ---
 
-Mặc dù thuật ngữ *microservices* có một số sự mơ hồ cố hữu, một số đặc điểm là chung:  
-- Chúng nhỏ, tự chủ, kết hợp rời rạc  
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ  
-- Chuyên biệt để giải quyết một việc  
-- Thường được triển khai trong **event-driven architecture**
+## 1. Bản chất kỹ thuật của Intelligent Prompt Routing
 
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:  
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng  
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng  
-- **Con người**: quyền sở hữu nhóm, quản lý *cognitive load*
+Thay vì yêu cầu kỹ sư phải thiết lập cứng (hard-code) hoặc tự xây dựng các mô hình phân loại phụ (classification models) tốn kém để phân bổ prompt, giải pháp này cung cấp một **Serverless Endpoint** duy nhất làm trung gian.
 
----
+Khi một truy vấn đầu vào (*Incoming Prompt*) đi vào hệ thống, Router sẽ chạy một thuật toán dự đoán nội bộ để ước lượng độ phức tạp và hiệu suất mong đợi của từng phân lớp mô hình trong cùng một dòng (*Model Family*) theo thời gian thực:
 
-## Lựa chọn công nghệ và phạm vi giao tiếp
+| Loại tác vụ | Mô tả | Mô hình được định tuyến |
+| --- | --- | --- |
+| **High Complexity / Deep Reasoning** | Tác vụ phức tạp, cần suy luận sâu | Claude 3.5 Sonnet, Llama 3.1 70B |
+| **Low Complexity / Operational** | Tra cứu thông tin, FAQ, tác vụ thủ tục | Claude 3 Haiku, Llama 3.1 8B |
 
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+Luồng xử lý: **User Query → API Gateway → Lambda → Amazon Bedrock (Intelligent Prompt Routing) → Nova Pro / Nova Lite** (hoặc các mô hình tương đương trong cùng model family).
 
 ---
 
-## The pub/sub hub
+## 2. Phân tích định lượng và hiệu quả kinh tế
 
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.  
-- Mỗi microservice chỉ phụ thuộc vào *hub*  
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất  
-- Giảm số lượng synchronous calls vì pub/sub là *push* không đồng bộ một chiều
+Dựa trên các thực nghiệm thực tế được ghi nhận bởi AWS Community Builder cho một truy vấn đơn giản (ước tính khoảng 15 input tokens và 300 output tokens), hiệu quả tối ưu hóa được thể hiện rất rõ ràng:
 
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
+### Chi phí và độ trễ trên mỗi truy vấn đơn lẻ
 
----
+| Mô hình | Chi phí / query | Độ trễ trung bình |
+| --- | --- | --- |
+| Claude 3 Haiku | $0.000379 | ~3.7 giây |
+| Claude 3.5 Sonnet | $0.0066 | ~9.4 giây |
 
-## Core microservice
+**Hiệu quả:** Giảm **94.26%** chi phí và tốc độ phản hồi nhanh hơn **~2.5 lần** đối với tác vụ đơn giản.
 
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:  
-- **Amazon S3** bucket cho dữ liệu  
-- **Amazon DynamoDB** cho danh mục dữ liệu  
-- **AWS Lambda** để ghi message vào data lake và danh mục  
-- **Amazon SNS** topic làm *hub*  
-- **Amazon S3** bucket cho artifacts như mã Lambda
+### Quy mô production (1 triệu truy vấn đơn giản)
 
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
+| Chiến lược | Chi phí ước tính |
+| --- | --- |
+| Dùng thuần Sonnet | ~$6,600.00 |
+| Dùng thuần Haiku | ~$378.75 |
+| **Tiết kiệm tối đa** | **$6,221.25** (giảm ~17.4 lần chi phí biên) |
 
----
-
-## Front door microservice
-
-- Cung cấp API Gateway để tương tác REST bên ngoài  
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**  
-- Cơ chế *deduplication* tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
+**Case study thực tế:** Báo cáo từ DoiT cho thấy khi kết hợp chiến lược định tuyến mô hình linh hoạt cùng các giải pháp tối ưu hạ tầng khác, một hệ thống doanh nghiệp lớn đã giảm hóa đơn vận hành Bedrock từ **$40,000/tháng** xuống còn **$18,000/tháng**.
 
 ---
 
-## Staging ER7 microservice
+## 3. Ứng dụng nâng cao: Tối ưu hóa cho cấu trúc Model Agent
 
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute  
-- Step Functions Express Workflow để chuyển ER7 → JSON  
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic  
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
+Đối với các hệ thống chạy theo kiến trúc **Model Agent** (Hệ tác nhân AI), cơ chế định tuyến này giải quyết được bài toán thắt nút cổ chai về cả chi phí lẫn thời gian phản hồi qua các vòng lặp tư duy (*Reasoning loops*):
+
+**Phân cấp tác vụ trong Agent Workflow:** Các Agent thường trải qua nhiều bước lặp như Lập kế hoạch (Planning), Gọi công cụ (Tool calling), Trích xuất thực thể (Data Extraction), và Đánh giá (Reflection). Router giúp các bước trung gian mang tính thủ tục chạy trên Haiku để lấy tốc độ và chi phí thấp, chỉ kích hoạt Sonnet khi cần xử lý logic nặng hoặc giải quyết ngoại lệ (Exception handling).
+
+**Giảm chi phí tích lũy bộ nhớ (Memory Accumulation):** Agent bắt buộc phải duy trì lịch sử hội thoại (*Context window*) lớn qua từng bước lặp. Khi kết hợp cơ chế Prompt Routing với **Prompt Caching** (giảm tới 90% chi phí cho các token lặp lại), hệ thống Agent sẽ đạt được trạng thái tối ưu hóa kép (*Double Win*).
 
 ---
 
-## Tính năng mới trong giải pháp
+## 4. Các hạn chế hệ thống cần lưu ý
 
-### 1. AWS CloudFormation cross-stack references
-Ví dụ *outputs* trong core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Mặc dù mang lại hiệu quả kinh tế cao, kiến trúc này vẫn tồn tại những rào cản kỹ thuật ở giai đoạn hiện tại:
+
+- **Giới hạn ngôn ngữ:** Thuật toán phân tích độ phức tạp của Router hiện tại được huấn luyện tối ưu nhất trên tập dữ liệu tiếng Anh. Khi áp dụng cho các ngôn ngữ khác như tiếng Việt, độ chính xác của việc định tuyến có thể bị ảnh hưởng.
+- **Tính đóng gói của Router:** Hệ thống phân phối dựa trên thuật toán tổng quát của AWS, không thể tự động tinh chỉnh hoặc học lại dựa trên dữ liệu hiệu năng (*performance data*) đặc thù riêng biệt của từng ứng dụng.
+
+---
+
+## Kết luận
+
+Cơ chế **Định tuyến Prompt Thông minh** dịch chuyển tư duy thiết kế hệ thống AI từ việc tìm kiếm một mô hình vạn năng sang tư duy phối hợp các phân lớp mô hình một cách linh hoạt.
+
+Điểm cộng lớn của giải pháp này là **"zero integration overhead"** — kỹ sư không cần viết thêm pipeline hay logic phân loại phức tạp nào trong code, chỉ cần thay đổi mã định danh mô hình (`modelId`) từ mã ARN của một model cụ thể sang mã ARN của **Prompt Router** là hệ thống có thể tự động vận hành mượt mà.
+
+---
+
+**Nguồn tham khảo:**  
+- [Towards AWS — Gerardo Arroyo](https://towardsaws.com/stop-paying-for-every-token-amazon-bedrock-intelligent-prompt-routing-f01d81a7e18f)  
+- [Amazon Bedrock Intelligent Prompt Routing (AWS Docs)](https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-routing.html)

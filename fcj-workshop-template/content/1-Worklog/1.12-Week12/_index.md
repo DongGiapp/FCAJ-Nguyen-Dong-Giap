@@ -1,57 +1,37 @@
 ---
-title: "Week 12 Worklog"
+title: "Worklog Tuần 12"
 date: 2024-01-01
-weight: 2
+weight: 12
 chapter: false
 pre: " <b> 1.12. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Mục tiêu tuần 12:
 
-### Week 12 Objectives:
+* Dọn tài nguyên AWS, hoàn thiện báo cáo và tự đánh giá.
+* Tuần cuối — em ôn lại toàn bộ hành trình 12 tuần.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+### Các công việc cần triển khai trong tuần này:
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Xóa stack CloudFormation / `sam delete` để tránh phí phát sinh <br> - Kiểm tra Budget xem có charge ngoài ý muốn không | 06/07/2026 | 06/07/2026 | |
+| 3 | - Viết phần 6-Self-evaluation: điểm mạnh, điểm yếu, bài học <br> - Em thành thật ghi phần Cognito và TypeScript còn yếu | 07/07/2026 | 07/07/2026 | |
+| 4 | - Hoàn thiện trang chủ báo cáo: thông tin cá nhân, ảnh đại diện <br> - Viết phần 7-Feedback | 08/07/2026 | 08/07/2026 | |
+| 5 | - Push code lên GitHub, kiểm tra GitHub Pages deploy thành công <br> - Duyệt lại toàn bộ 12 tuần worklog | 09/07/2026 | 09/07/2026 | |
+| 6 | - Nộp báo cáo trên LMS <br> - Ôn lại kiến thức Cloud Journey đã học, lập kế hoạch học tiếp sau thực tập | 10/07/2026 | 10/07/2026 | |
 
+### Kết quả đạt được tuần 12 (tổng kết chương trình):
 
-### Week 12 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Hoàn thành 12 tuần thực tập FCJ đúng tiến độ.
+* Deploy và cleanup AWS resources đúng quy trình.
+* Báo cáo Hugo đầy đủ: Worklog, Proposal, Blogs, Events, Workshop, Self-evaluation.
+* **Những gì em học được:**
+  * AWS cơ bản: IAM, VPC, EC2, S3, CLI, DynamoDB, Lambda, Cognito, SAM, CloudWatch.
+  * Làm việc nhóm với Git, review code, phân công task.
+  * Viết báo cáo kỹ thuật với nội dung chính có cả tiếng Việt và tiếng Anh.
+* **Những gì em cần cải thiện:**
+  * TypeScript và serverless patterns (single-table design, error handling).
+  * Cognito và bảo mật API — em hiểu flow nhưng chưa tự tin config phức tạp.
+  * Tiếng Anh kỹ thuật khi đọc docs AWS.
+* Dù học lực trung bình, em thấy mình tiến bộ rõ rệt sau 12 tuần — từ người mới đến deploy được API serverless thật.

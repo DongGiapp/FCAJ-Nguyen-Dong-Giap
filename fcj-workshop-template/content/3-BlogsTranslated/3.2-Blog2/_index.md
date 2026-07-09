@@ -1,126 +1,156 @@
 ---
 title: "Blog 2"
 date: 2024-01-01
-weight: 1
+weight: 2
 chapter: false
 pre: " <b> 3.2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+**Người dịch:** Nguyễn Đông Giáp
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+# Tối ưu hóa chi phí vận hành backend qua kiến trúc serverless với AWS Lambda
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, *“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”*, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+![Kiến trúc serverless: Client → API Gateway → Lambda → DynamoDB](/images/3-BlogsTranslated/3.2-Blog2/serverless-architecture.png)
 
 ---
 
-## Architecture Guidance
+## 1. Bài toán chi phí của kiến trúc truyền thống
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+Một sai lầm phổ biến khi triển khai ứng dụng backend là duy trì các máy chủ EC2 hoạt động 24/7 bất kể lưu lượng thực tế.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
+Trong nhiều hệ thống nội bộ hoặc startup giai đoạn đầu, CPU thường chỉ sử dụng dưới 10–20% nhưng doanh nghiệp vẫn phải trả tiền cho toàn bộ tài nguyên đã cấp phát.
 
-**The solution architecture is now as follows:**
+Điều này tạo ra hiện tượng:
 
-> *Figure 1. Overall architecture; colored boxes represent distinct services.*
+- Trả tiền cho thời gian nhàn rỗi (**Idle Cost**)
+- Tốn công quản trị máy chủ
+- Khó mở rộng khi lượng truy cập tăng đột biến
+- Chi phí vận hành tăng theo số lượng server
 
----
-
-While the term *microservices* has some inherent ambiguity, certain traits are common:  
-- Small, autonomous, loosely coupled  
-- Reusable, communicating through well-defined interfaces  
-- Specialized to do one thing well  
-- Often implemented in an **event-driven architecture**
-
-When determining where to draw boundaries between microservices, consider:  
-- **Intrinsic**: technology used, performance, reliability, scalability  
-- **Extrinsic**: dependent functionality, rate of change, reusability  
-- **Human**: team ownership, managing *cognitive load*
+**AWS Lambda** được thiết kế để giải quyết chính xác bài toán này bằng mô hình **Serverless Compute**: chỉ chạy code khi có yêu cầu và tự động scale theo lưu lượng thực tế.
 
 ---
 
-## Technology Choices and Communication Scope
+## 2. Bản chất kỹ thuật của AWS Lambda
 
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
+AWS Lambda là dịch vụ **Function-as-a-Service (FaaS)**. Thay vì quản lý server, kỹ sư chỉ cần upload code.
 
----
+Khi có sự kiện phát sinh:
 
-## The Pub/Sub Hub
+- HTTP Request từ API Gateway
+- Upload file lên S3
+- Tin nhắn từ SQS
+- Event từ EventBridge
+- Thay đổi dữ liệu DynamoDB
 
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.  
-- Each microservice depends only on the *hub*  
-- Inter-microservice connections are limited to the contents of the published message  
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous *push*
-
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
+Lambda sẽ tự động khởi tạo môi trường thực thi, chạy code và giải phóng tài nguyên sau khi hoàn thành.
 
 ---
 
-## Core Microservice
+## 3. Phân tích hiệu quả kinh tế
 
-Provides foundational data and communication layer, including:  
-- **Amazon S3** bucket for data  
-- **Amazon DynamoDB** for data catalog  
-- **AWS Lambda** to write messages into the data lake and catalog  
-- **Amazon SNS** topic as the *hub*  
-- **Amazon S3** bucket for artifacts such as Lambda code
+### Mô hình EC2 truyền thống
 
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
+Ví dụ:
 
----
+- 1 EC2 `t3.medium` chạy 24/7
+- Backend có 500 người dùng/ngày
 
-## Front Door Microservice
+**Chi phí:** Trả tiền cả tháng — dù có request hay không.
 
-- Provides an API Gateway for external REST interaction  
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**  
-- Self-managed *deduplication* mechanism using DynamoDB instead of SNS FIFO because:  
-  1. SNS deduplication TTL is only 5 minutes  
-  2. SNS FIFO requires SQS FIFO  
-  3. Ability to proactively notify the sender that the message is a duplicate  
+### Mô hình Lambda
 
----
+Lambda chỉ tính phí:
 
-## Staging ER7 Microservice
+- Số lần gọi hàm (**Invocations**)
+- Thời gian thực thi (**Duration**)
 
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute  
-- Step Functions Express Workflow to convert ER7 → JSON  
-- Two Lambdas:  
-  1. Fix ER7 formatting (newline, carriage return)  
-  2. Parsing logic  
-- Result or error is pushed back into the pub/sub hub  
+**Không có request → chi phí gần như bằng 0.**
+
+AWS xác nhận Lambda tự động scale từ 0 request lên hàng nghìn request mỗi giây mà không cần quản trị hạ tầng.
 
 ---
 
-## New Features in the Solution
+## 4. Ứng dụng thực tế cho AI Agent và Chatbot
 
-### 1. AWS CloudFormation Cross-Stack References
-Example *outputs* in the core microservice:
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
+Đây là phần rất hợp với đồ án AI hiện nay.
+
+**Thay vì:**
+
+```text
+EC2
+└── FastAPI
+    └── AI Chatbot
+```
+
+**Có thể chuyển sang:**
+
+```text
+API Gateway
+    │
+    ▼
+Lambda
+    │
+    ▼
+Amazon Bedrock
+```
+
+**Lợi ích:**
+
+- Không cần bật server liên tục
+- Tự động scale khi nhiều người dùng chat
+- Chỉ trả tiền khi chatbot được sử dụng
+- Giảm đáng kể chi phí cho các dự án sinh viên hoặc startup
+
+Lambda hiện còn hỗ trợ tích hợp trực tiếp với các workflow AI thông qua **MCP** và **Bedrock**.
+
+---
+
+## 5. Kết hợp Event-Driven Architecture
+
+Một ưu điểm lớn khác là khả năng xây dựng hệ thống hướng sự kiện.
+
+**Ví dụ website bán hàng:**
+
+```text
+Khách đặt hàng
+    │
+    ▼
+DynamoDB
+    │
+    ▼
+EventBridge
+    │
+    ┌────┴────┐
+    ▼         ▼
+Lambda      Lambda
+Gửi mail    Cập nhật kho
+```
+
+Mỗi Lambda chỉ thực hiện một nhiệm vụ nhỏ. AWS khuyến nghị chia nhỏ Lambda theo từng chức năng thay vì xây dựng **"Lambda Monolith"** để tăng khả năng mở rộng và giảm chi phí bảo trì.
+
+---
+
+## 6. Những hạn chế cần lưu ý
+
+### Cold Start
+
+Khi Lambda không được sử dụng trong một khoảng thời gian, lần gọi tiếp theo có thể phát sinh độ trễ khởi động. Đây là vấn đề phổ biến trong kiến trúc serverless.
+
+### Khó debug hơn Monolith
+
+Một hệ thống có 20 Lambda, 10 Queue, 5 Event Source sẽ phức tạp hơn đáng kể so với một backend đơn khối.
+
+### Không phù hợp với workload chạy liên tục
+
+Các tác vụ sau thường không phải ứng viên tốt nhất cho Lambda:
+
+- Streaming thời gian thực
+- Video Processing kéo dài
+- Hệ thống giao dịch siêu thấp độ trễ
+
+---
+
+## Kết luận
+
+AWS Lambda chuyển tư duy thiết kế backend từ **"luôn bật server"** sang **"chỉ chạy khi có request"** — phù hợp cho backend nhỏ, chatbot, AI agent và dự án có lưu lượng không đều. Kết hợp với API Gateway, DynamoDB, EventBridge và Amazon Bedrock, đây là hướng đi thực tế để giảm chi phí vận hành mà em áp dụng trong dự án workshop nhóm.

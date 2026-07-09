@@ -1,47 +1,79 @@
 ---
-title: "Sharing and Feedback"
+title: "Chia sẻ, đóng góp ý kiến"
 date: 2024-01-01
 weight: 7
 chapter: false
 pre: " <b> 7. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+# Chia sẻ và đóng góp ý kiến
 
-> Here, you can freely share your personal opinions about your experience participating in the First Cloud Journey program. This will help the FCJ team improve any shortcomings based on the following aspects:
+Sau quá trình tham gia chương trình **AWS First Cloud AI Journey**, em có thêm nhiều trải nghiệm thực tế về AWS, cloud architecture, serverless và các xu hướng AI hiện nay. Đây là một chương trình hữu ích vì không chỉ cung cấp kiến thức kỹ thuật, mà còn tạo môi trường để sinh viên chủ động tìm hiểu, thực hành, viết tài liệu và kết nối với cộng đồng.
 
-### Overall Evaluation
+## Đánh giá chung
 
-**1. Working Environment**  
-The working environment is very friendly and open. FCJ members are always willing to help whenever I encounter difficulties, even outside working hours. The workspace is tidy and comfortable, helping me focus better. However, I think it would be nice to have more social gatherings or team bonding activities to strengthen relationships.
+### 1. Nội dung chương trình
 
-**2. Support from Mentor / Team Admin**  
-The mentor provides very detailed guidance, explains clearly when I don’t understand, and always encourages me to ask questions. The admin team supports administrative tasks, provides necessary documents, and creates favorable conditions for me to work effectively. I especially appreciate that the mentor allows me to try and solve problems myself instead of just giving the answer.
+Nội dung chương trình khá phù hợp với định hướng học tập và phát triển của em. Các chủ đề như AWS Lambda, API Gateway, DynamoDB, Amazon Bedrock, CloudFront, MCP và multi-agent system đều là những kiến thức gần với nhu cầu thực tế hiện nay.
 
-**3. Relevance of Work to Academic Major**  
-The tasks I was assigned align well with the knowledge I learned at university, while also introducing me to new areas I had never encountered before. This allowed me to both strengthen my foundational knowledge and gain practical skills.
+Thông qua việc xây dựng proposal, workshop và các bài blog, em có cơ hội nhìn lại kiến thức theo cách có hệ thống hơn. Thay vì chỉ đọc tài liệu rời rạc, em phải hiểu nội dung, chọn lọc ý chính và trình bày lại sao cho người khác có thể theo dõi được.
 
-**4. Learning & Skill Development Opportunities**  
-During the internship, I learned many new skills such as using project management tools, teamwork skills, and professional communication in a corporate environment. The mentor also shared valuable real-world experiences that helped me better plan my career path.
+### 2. Môi trường học tập và cộng đồng
 
-**5. Company Culture & Team Spirit**  
-The company culture is very positive: everyone respects each other, works seriously but still keeps things enjoyable. When there are urgent projects, everyone works together and supports one another regardless of their position. This made me feel like a real part of the team, even as an intern.
+Em đánh giá cao môi trường học tập mở của cộng đồng FCAJ. Các sự kiện Community Day giúp em được tiếp cận với nhiều chủ đề mới, nghe chia sẻ từ các anh chị có kinh nghiệm và hiểu hơn cách AWS cũng như AI được áp dụng trong thực tế.
 
-**6. Internship Policies / Benefits**  
-The company provides an internship allowance and offers flexible working hours when needed. In addition, having the opportunity to join internal training sessions is a big plus.
+Không khí cộng đồng thân thiện, khuyến khích việc đặt câu hỏi, chia sẻ kiến thức và học hỏi lẫn nhau. Điều này giúp sinh viên cảm thấy dễ tiếp cận hơn với các chủ đề cloud vốn khá rộng và nhiều khái niệm mới.
 
----
+### 3. Kỹ năng đạt được
 
-### Additional Questions
-- What did you find **most satisfying** during your internship?  
-- What do you think the company **should improve** for future interns?  
-- If recommending to a friend, would you **suggest they intern here**? Why or why not?  
+Trong quá trình hoàn thiện báo cáo, em cải thiện được nhiều kỹ năng:
 
----
+- Đọc hiểu tài liệu kỹ thuật tiếng Anh.
+- Tóm tắt và biên soạn nội dung blog AWS.
+- Trình bày kiến thức bằng Markdown/Hugo.
+- Hiểu cách tổ chức workshop theo từng bước.
+- Củng cố kiến thức về serverless backend với API Gateway, Lambda và DynamoDB.
+- Mở rộng góc nhìn về AI agent, LLM, prompt routing và cloud operations.
 
-### Suggestions & Expectations
-- Do you have any suggestions to improve the internship experience?  
-- Would you like to continue this program in the future?  
-- Any other comments (free sharing):
+### 4. Điều em hài lòng nhất
+
+Điều em hài lòng nhất là chương trình giúp em có một sản phẩm báo cáo tương đối hoàn chỉnh, gồm proposal, workshop, blog, event recap, tự đánh giá và feedback. Qua đó, em không chỉ học kiến thức AWS mà còn rèn luyện cách ghi chép, hệ thống hóa và trình bày lại những gì mình đã học.
+
+Em cũng rất thích các sự kiện FCAJ Community Day vì nội dung cập nhật, gần với xu hướng AI/cloud hiện nay và có nhiều ví dụ thực tế.
+
+## Góp ý cải thiện
+
+### 1. Cần thêm hướng dẫn mẫu theo từng mốc
+
+Với sinh viên mới tiếp cận AWS, nếu có checklist cụ thể cho từng giai đoạn như proposal, workshop, blog, event và self-evaluation thì quá trình làm báo cáo sẽ dễ theo dõi hơn.
+
+Ví dụ:
+
+- Tuần 1-2: chọn đề tài và viết proposal.
+- Tuần 3-6: xây dựng workshop.
+- Tuần 7-9: viết blog và ghi nhận event.
+- Tuần 10-12: hoàn thiện báo cáo, kiểm tra nội dung và trình bày.
+
+### 2. Nên có thêm buổi review giữa kỳ
+
+Nếu có một buổi review giữa kỳ, sinh viên có thể nhận feedback sớm về hướng làm, cấu trúc workshop, nội dung blog và cách trình bày. Điều này giúp tránh việc cuối kỳ mới phát hiện nội dung bị lệch hoặc thiếu phần quan trọng.
+
+### 3. Tăng thêm ví dụ thực hành
+
+Các chủ đề như IAM, API Gateway, Lambda, DynamoDB, Bedrock hoặc MCP sẽ dễ hiểu hơn nếu có thêm ví dụ demo nhỏ, hình ảnh kiến trúc hoặc bài lab ngắn. Những ví dụ thực tế giúp sinh viên liên kết lý thuyết với cách triển khai trên AWS.
+
+## Mong muốn trong tương lai
+
+Trong thời gian tới, em mong chương trình tiếp tục có thêm các buổi chia sẻ về:
+
+- Serverless architecture trong production.
+- Amazon Bedrock và AI agent.
+- Bảo mật và tối ưu chi phí trên AWS.
+- DevOps, observability và CloudWatch.
+- Cách xây dựng portfolio cloud cho sinh viên.
+
+Nếu có cơ hội, em vẫn muốn tiếp tục tham gia các hoạt động của cộng đồng FCAJ để học thêm kiến thức mới, cập nhật xu hướng công nghệ và kết nối với các bạn cùng quan tâm đến AWS và AI.
+
+## Kết luận
+
+Nhìn chung, chương trình AWS First Cloud AI Journey mang lại cho em nhiều giá trị cả về kiến thức kỹ thuật lẫn kỹ năng tự học. Sau quá trình tham gia, em tự tin hơn khi tiếp cận các dịch vụ AWS, hiểu rõ hơn về kiến trúc serverless và có thêm động lực để tiếp tục theo đuổi hướng cloud và AI trong tương lai.

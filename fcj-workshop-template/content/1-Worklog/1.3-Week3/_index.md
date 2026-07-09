@@ -1,57 +1,30 @@
 ---
-title: "Week 3 Worklog"
+title: "Worklog Tuần 3"
 date: 2024-01-01
-weight: 1
+weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
 
+### Mục tiêu tuần 3:
 
-### Week 3 Objectives:
+* Học AWS CLI và DynamoDB — hai thứ nhóm mình sẽ dùng nhiều cho dự án.
+* Thảo luận với nhóm về hướng đề tài workshop.
 
-* Connect and get acquainted with members of First Cloud Journey.
-* Understand basic AWS services, how to use the console & CLI.
+### Các công việc cần triển khai trong tuần này:
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 2 | - Học *Command Line Operations with AWS CLI* <br> - Cài AWS CLI, chạy `aws configure`, thử `aws sts get-caller-identity` | 04/05/2026 | 04/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 3 | - Học *NoSQL Database Essentials with Amazon DynamoDB* <br> - Tìm hiểu partition key, sort key — em phải đọc lại 2 lần mới hiểu | 05/05/2026 | 05/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 4 | - Học *Monitoring with Amazon CloudWatch* (phần cơ bản) <br> - Xem log EC2 tuần trước trên CloudWatch | 06/05/2026 | 06/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| 5 | - Họp nhóm: chốt đề tài **Serverless Workflow Engine** <br> - Phân công sơ bộ: em phụ trách phần Lambda và DynamoDB | 07/05/2026 | 07/05/2026 | <https://github.com/cheduc1234/duan> |
+| 6 | - Vẽ sơ đồ kiến trúc thô: API Gateway → Lambda → DynamoDB <br> - Tham khảo README repo nhóm, ghi chú câu hỏi chưa hiểu | 08/05/2026 | 08/05/2026 | <https://github.com/cheduc1234/duan> |
 
+### Kết quả đạt được tuần 3:
 
-### Week 3 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Cài và cấu hình AWS CLI thành công, gọi được API từ terminal.
+* Hiểu DynamoDB khác RDS ở chỗ NoSQL, không cần schema cố định — phù hợp cho API đơn giản.
+* Nhóm đã chốt đề tài serverless, em biết mình sẽ làm gì trong các tuần tới.
+* CloudWatch còn mới, em mới xem được log cơ bản.
+* Vẫn chưa hiểu hết single-table design, dự định học kỹ hơn khi code thật.
