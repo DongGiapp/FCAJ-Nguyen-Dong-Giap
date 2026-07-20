@@ -57,10 +57,10 @@
                   {{ $viRel = $currentRel }}
                   {{ $enRel = printf "/en%s" $currentRel }}
                 {{ end }}
-                <option id="en" value="{{ $enRel }}" {{ if eq .Page.Lang "en" }}selected{{ end }}>
+                <option id="en" value="{{ $enRel | relURL }}" {{ if eq .Page.Lang "en" }}selected{{ end }}>
                   English
                 </option>
-                <option id="vi" value="{{ $viRel }}" {{ if eq .Page.Lang "vi" }}selected{{ end }}>
+                <option id="vi" value="{{ $viRel | relURL }}" {{ if eq .Page.Lang "vi" }}selected{{ end }}>
                   Tiếng Việt
                 </option>
               </select>
