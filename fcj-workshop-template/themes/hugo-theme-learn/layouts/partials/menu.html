@@ -46,23 +46,11 @@
             <i class="fas fa-language fa-fw"></i>
             <div class="select-style">
               <select id="select-language" onchange="location = this.value;">
-                {{ $currentRel := .RelPermalink }}
-                {{ $enRel := "" }}
-                {{ $viRel := "" }}
-                {{ if eq .Page.Lang "en" }}
-                  {{ $enRel = $currentRel }}
-                  {{ $viRel = replaceRE "^/en" "" $currentRel }}
-                  {{ if eq $viRel "" }}{{ $viRel = "/" }}{{ end }}
-                {{ else }}
-                  {{ $viRel = $currentRel }}
-                  {{ $enRel = printf "/en%s" $currentRel }}
+                {{ range .AllTranslations }}
+                <option id="{{ .Language.Lang }}" value="{{ .RelPermalink }}" {{ if eq .Language.Lang $.Page.Lang }}selected{{ end }}>
+                  {{ .Language.LanguageName }}
+                </option>
                 {{ end }}
-                <option id="en" value="{{ $enRel | relURL }}" {{ if eq .Page.Lang "en" }}selected{{ end }}>
-                  English
-                </option>
-                <option id="vi" value="{{ $viRel | relURL }}" {{ if eq .Page.Lang "vi" }}selected{{ end }}>
-                  Tiếng Việt
-                </option>
               </select>
               <svg
                 version="1.1"
