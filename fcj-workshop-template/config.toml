@@ -1,6 +1,6 @@
 baseURL = "https://donggiapp.github.io/FCAJ-Nguyen-Dong-Giap/"
 relativeURLs = false
-canonifyURLs = false
+canonifyURLs = true
 defaultContentLanguage = "vi"
 defaultContentLanguageInSubdir = false
 
