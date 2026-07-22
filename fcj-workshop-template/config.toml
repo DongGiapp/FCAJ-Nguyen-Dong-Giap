@@ -1,7 +1,8 @@
 baseURL = "https://donggiapp.github.io/FCAJ-Nguyen-Dong-Giap/"
 relativeURLs = false
 canonifyURLs = true
-defaultContentLanguage = "vi"
+# Serve the English version at the site root. Vietnamese remains available at /vi/.
+defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 
 # Change the default theme to be use when building the site with Hugo
