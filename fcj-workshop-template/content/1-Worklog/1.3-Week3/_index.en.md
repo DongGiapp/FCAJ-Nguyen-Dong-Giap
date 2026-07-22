@@ -1,32 +1,30 @@
-﻿---
+---
 title: "Week 3 Worklog"
-date: 2024-01-01
+date: 2026-05-04
 weight: 3
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
 
-# Week 3: AWS CLI, DynamoDB, and group project direction
+### Week 3 Objectives
 
-## Objectives
+- Study the AWS CLI and Amazon DynamoDB for the group project.
+- Discuss and select the direction of the workshop project with the team.
 
-- Learn how to interact with AWS through the CLI.
-- Study DynamoDB as a managed NoSQL database.
-- Start thinking about the group project direction.
+### Work Performed This Week
 
-## Work Completed
+| Day | Work performed | Start date | Completion date | Reference |
+|---|---|---|---|---|
+| Monday | Studied *Command Line Operations with AWS CLI*.<br>Installed the AWS CLI, configured a profile, and ran `aws sts get-caller-identity`. | 04/05/2026 | 04/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Tuesday | Studied *NoSQL Database Essentials with Amazon DynamoDB*.<br>Reviewed partition keys and sort keys and revisited the material to understand the concepts. | 05/05/2026 | 05/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Wednesday | Studied the fundamentals of *Monitoring with Amazon CloudWatch*.<br>Reviewed logs associated with the previous EC2 exercise. | 06/05/2026 | 06/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Thursday | Joined the team meeting that selected **Serverless Workflow Engine** as the group project.<br>Received initial responsibility for Lambda and DynamoDB work. | 07/05/2026 | 07/05/2026 | <https://github.com/cheduc1234/duan> |
+| Friday | Drafted an initial API Gateway → Lambda → DynamoDB architecture.<br>Reviewed the group repository README and recorded open questions. | 08/05/2026 | 08/05/2026 | <https://github.com/cheduc1234/duan> |
 
-- Installed and configured AWS CLI.
-- Practiced basic AWS CLI commands.
-- Studied DynamoDB concepts such as table, partition key, item, and on-demand billing.
-- Discussed possible project topics with the group.
+### Week 3 Results
 
-## Results Achieved
-
-- Understood how CLI complements the AWS Console.
-- Learned the basic data model of DynamoDB.
-- Started shaping the idea for a serverless-oriented project.
-
-## Reflection
-
-This week helped me connect the theory from Cloud Journey with practical report and project work. Although some concepts were still new, documenting the process each week made it easier to review what I had learned and identify what needed more practice.
+- Installed and configured the AWS CLI and successfully called AWS APIs from the terminal.
+- Understood the high-level difference between DynamoDB and a relational database.
+- Confirmed the group project topic and individual area of responsibility.
+- Obtained basic experience locating logs in CloudWatch.
+- Identified DynamoDB single-table design as a topic requiring deeper study.

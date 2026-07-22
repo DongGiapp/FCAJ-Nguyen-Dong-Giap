@@ -1,31 +1,34 @@
-﻿---
+---
 title: "Week 9 Worklog"
-date: 2024-01-01
+date: 2026-06-15
 weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
 
-# Week 9: Deploying to AWS, testing, and CloudWatch
+### Week 9 Objectives
 
-## Objectives
+- Deploy the group project to AWS for the first time while monitoring cost exposure.
+- Add tests and inspect operational logs in CloudWatch.
 
-- Deploy the serverless components to AWS.
-- Run API tests after deployment.
-- Use CloudWatch to inspect logs and errors.
+### Work Performed This Week
 
-## Work Completed
+| Day | Work performed | Start date | Completion date | Reference |
+|---|---|---|---|---|
+| Monday | Studied *Monitoring Serverless Applications*.<br>Reviewed Lambda Duration and Errors metrics in CloudWatch. | 15/06/2026 | 15/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Tuesday | Added unit tests under `tests/` and ran `npm test`.<br>Used `aws-sdk-client-mock` to learn how to mock DynamoDB calls. | 16/06/2026 | 16/06/2026 | <https://github.com/cheduc1234/duan> |
+| Wednesday | Ran `sam build` and `sam deploy --guided`.<br>Recorded the API endpoint from the stack outputs. | 17/06/2026 | 17/06/2026 | |
+| Thursday | Called the deployed API using curl and Postman.<br>Created a test workflow and verified the item in the DynamoDB console. | 18/06/2026 | 18/06/2026 | |
+| Friday | Inspected Lambda logs for a `500` response in CloudWatch.<br>Corrected a defect and deployed the update. | 19/06/2026 | 19/06/2026 | |
 
-- Deployed Lambda/API resources to AWS.
-- Tested API endpoints with sample requests.
-- Checked Lambda logs and execution results in CloudWatch.
+### Week 9 Results
 
-## Results Achieved
+- Deployed the group workload to AWS and recorded a CloudFormation stack completion screenshot.
+- Called an AWS-hosted endpoint rather than only the local API.
+- Ran unit tests successfully and gained confidence in changing the handlers.
+- Used CloudWatch Logs to investigate an application failure.
+- Kept the exercise within the budget configured during Week 1.
 
-- Understood the full flow from client request to API Gateway, Lambda, and DynamoDB.
-- Learned how CloudWatch helps troubleshoot serverless applications.
-- Validated the basic API behavior after deployment.
-
-## Reflection
-
-This week helped me connect the theory from Cloud Journey with practical report and project work. Although some concepts were still new, documenting the process each week made it easier to review what I had learned and identify what needed more practice.
+{{% notice warning %}}
+The deployment evidence belongs to the external group project. A current production endpoint, deployment log, source-controlled infrastructure, and reproducible test report are still required before making a production claim in this report.
+{{% /notice %}}

@@ -1,31 +1,30 @@
-﻿---
+---
 title: "Week 1 Worklog"
-date: 2024-01-01
+date: 2026-04-20
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
 ---
 
-# Week 1: Getting familiar with FCJ, AWS account, and basic IAM
+### Week 1 Objectives
 
-## Objectives
+- Meet the mentors and FCJ members and understand the internship rules.
+- Create an AWS account and develop an initial understanding of IAM.
 
-- Get familiar with the First Cloud Journey program and internship workflow.
-- Create an AWS account and learn basic IAM concepts.
-- Start using Cloud Journey learning materials.
+### Work Performed This Week
 
-## Work Completed
+| Day | Work performed | Start date | Completion date | Reference |
+|---|---|---|---|---|
+| Monday | Joined the FCJ onboarding session and met the team.<br>Reviewed the report guidelines and LMS worklog submission process. | 20/04/2026 | 20/04/2026 | |
+| Tuesday | Studied *Creating Your First AWS Account* on Cloud Journey.<br>Created an AWS account and enabled MFA; initially encountered a card-verification issue. | 21/04/2026 | 21/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Wednesday | Studied *Managing Costs with AWS Budgets* and *Getting Help with AWS Support*.<br>Created a USD 10 budget to reduce the risk of unexpected charges. | 22/04/2026 | 22/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Thursday | Studied *Access Management with IAM*.<br>Created an IAM user and attached a policy; clarified the difference between the root user and an IAM user. | 23/04/2026 | 23/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Friday | Reviewed IAM users, groups, roles, and policies.<br>Cloned the Hugo internship-report template. | 24/04/2026 | 24/04/2026 | |
 
-- Joined the program orientation and reviewed the internship/report requirements.
-- Created or prepared an AWS account for learning and practice.
-- Studied IAM basics, including users, groups, policies, roles, and the principle of least privilege.
+### Week 1 Results
 
-## Results Achieved
-
-- Understood the purpose of IAM in AWS security.
-- Became familiar with the AWS Console and the structure of the internship report.
-- Built the foundation for later hands-on AWS labs.
-
-## Reflection
-
-This week helped me connect the theory from Cloud Journey with practical report and project work. Although some concepts were still new, documenting the process each week made it easier to review what I had learned and identify what needed more practice.
+- Created the AWS account and enabled MFA successfully.
+- Configured an AWS Budget notification at 80% of the budget threshold.
+- Understood why the root user should not be used for daily work.
+- Installed Hugo and ran the report website locally after reviewing the setup documentation.
+- Established the account-security and cost-awareness foundation required for later exercises.

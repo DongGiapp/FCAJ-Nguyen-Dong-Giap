@@ -1,31 +1,30 @@
-﻿---
+---
 title: "Week 7 Worklog"
-date: 2024-01-01
+date: 2026-06-01
 weight: 7
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
 
-# Week 7: Coding Lambda CRUD functions
+### Week 7 Objectives
 
-## Objectives
+- Implement the Lambda CRUD functions.
+- Apply a DynamoDB single-table access pattern in the group project.
 
-- Implement Create, Read, Update, and Delete logic.
-- Connect Lambda functions with DynamoDB.
-- Debug common errors during implementation.
+### Work Performed This Week
 
-## Work Completed
+| Day | Work performed | Start date | Completion date | Reference |
+|---|---|---|---|---|
+| Monday | Studied *Building Serverless CRUD with Lambda and DynamoDB*.<br>Completed the lab and compared it with the group implementation. | 01/06/2026 | 01/06/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Tuesday | Implemented `createWorkflow.ts` to parse JSON and write to DynamoDB.<br>Debugged an API Gateway body-parsing issue. | 02/06/2026 | 02/06/2026 | <https://github.com/cheduc1234/duan> |
+| Wednesday | Implemented `getTodos.ts` using `PK = USER#<userId>`.<br>Studied the AWS SDK for JavaScript v3 DynamoDB DocumentClient. | 03/06/2026 | 03/06/2026 | |
+| Thursday | Implemented `updateTodo.ts` and `deleteTodo.ts`.<br>Added a `404` response when the target item could not be found. | 04/06/2026 | 04/06/2026 | |
+| Friday | Performed manual tests with curl against the local SAM API.<br>Pushed the code and opened a pull request for team review. | 05/06/2026 | 05/06/2026 | |
 
-- Wrote Lambda code for Todo CRUD operations.
-- Handled request body parsing, validation, timestamps, and DynamoDB operations.
-- Debugged errors related to event structure, IAM permissions, and DynamoDB access.
+### Week 7 Results
 
-## Results Achieved
-
-- Completed the main CRUD logic for the serverless API.
-- Learned how Lambda interacts with DynamoDB through boto3.
-- Improved debugging skills through repeated errors and fixes.
-
-## Reflection
-
-This week helped me connect the theory from Cloud Journey with practical report and project work. Although some concepts were still new, documenting the process each week made it easier to review what I had learned and identify what needed more practice.
+- Completed four basic CRUD Lambda handlers and improved TypeScript familiarity.
+- Applied partition-key and sort-key concepts rather than a relational table model.
+- Used execution logs to debug request parsing and handler behavior.
+- Resolved issues involving body parsing and CORS.
+- Reached the milestone of running the API locally and submitting the work for review.

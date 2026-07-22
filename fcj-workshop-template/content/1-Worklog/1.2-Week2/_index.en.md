@@ -1,31 +1,30 @@
-﻿---
+---
 title: "Week 2 Worklog"
-date: 2024-01-01
+date: 2026-04-27
 weight: 2
 chapter: false
 pre: " <b> 1.2. </b> "
 ---
 
-# Week 2: Learning VPC, EC2, and S3
+### Week 2 Objectives
 
-## Objectives
+- Study the fundamentals of Amazon VPC, Amazon EC2, and Amazon S3.
+- Launch a first EC2 instance and establish an SSH connection.
 
-- Understand basic AWS networking and compute services.
-- Practice connecting to an EC2 instance.
-- Learn the role of S3 in cloud storage.
+### Work Performed This Week
 
-## Work Completed
+| Day | Work performed | Start date | Completion date | Reference |
+|---|---|---|---|---|
+| Monday | Studied *Networking Essentials with Amazon VPC*.<br>Documented VPCs, subnets, security groups, and the difference between security groups and network ACLs. | 27/04/2026 | 27/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Tuesday | Studied *Compute Essentials with EC2*.<br>Reviewed instance types and AMIs and selected `t3.micro` for the exercise. | 28/04/2026 | 28/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Wednesday | Studied *Instance Profiling with IAM Roles for EC2*.<br>Learned why static access keys should not be stored on an EC2 instance. | 29/04/2026 | 29/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Thursday | Launched a Linux EC2 instance, created a key pair, and connected through SSH.<br>Resolved an initial timeout caused by port 22 not being allowed in the security group. | 30/04/2026 | 30/04/2026 | <https://cloudjourney.awsstudygroup.com/> |
+| Friday | Studied *Static Website Hosting with Amazon S3*.<br>Enabled static hosting and uploaded a basic HTML file. | 01/05/2026 | 01/05/2026 | <https://cloudjourney.awsstudygroup.com/> |
 
-- Studied VPC concepts such as subnets, route tables, internet gateway, and security groups.
-- Launched an EC2 instance and practiced SSH connection.
-- Explored Amazon S3 buckets and basic object storage operations.
+### Week 2 Results
 
-## Results Achieved
-
-- Understood the basic relationship between VPC, EC2, and S3.
-- Successfully practiced remote access to a server.
-- Improved confidence when working with AWS infrastructure services.
-
-## Reflection
-
-This week helped me connect the theory from Cloud Journey with practical report and project work. Although some concepts were still new, documenting the process each week made it easier to review what I had learned and identify what needed more practice.
+- Successfully launched an EC2 instance and connected after correcting the security-group rule.
+- Understood the role of a VPC and the stateful filtering provided by security groups.
+- Hosted a simple static file using Amazon S3.
+- Learned to include network controls in the troubleshooting checklist for connection failures.
+- Became more familiar with navigating the AWS Management Console.
