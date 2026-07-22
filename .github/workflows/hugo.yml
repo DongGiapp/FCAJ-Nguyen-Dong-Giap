@@ -39,7 +39,7 @@ jobs:
           enablement: true
 
       - name: Build website
-        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: hugo --minify
 
       - name: Upload website artifact
         uses: actions/upload-pages-artifact@v3
