@@ -1,87 +1,76 @@
-﻿---
-title: "Introduction"
-date: 2024-01-01
+---
+title: "Workshop Scope and Architecture"
+date: 2026-07-22
 weight: 1
 chapter: false
 pre: " <b> 5.1. </b> "
 ---
 
-# Serverless Todo API on AWS
+# Serverless Todo API Workshop
 
-## Overview
+## Purpose
 
-In this workshop, you will build a **Serverless Todo Application API** using AWS services. This is a practical exercise that demonstrates how to create a modern, scalable backend without managing servers.
+This workshop demonstrates the minimum request path of a serverless CRUD API: API Gateway receives an HTTP request, a Lambda function applies business logic, and DynamoDB persists the result. It is designed as a learning baseline that can be deployed, tested, observed, and removed within a controlled AWS account.
 
-### What You'll Build
+## Implemented Baseline
 
-A complete RESTful API for a Todo application where users can:
-- Create new todo items
-- Retrieve all todos
-- Update todo status
-- Delete todos
+{{<mermaid align="center">}}
+flowchart LR
+    C["Postman or API client"] -->|"HTTPS request"| A["Amazon API Gateway REST API"]
+    A -->|"Route by method and path"| L["Four AWS Lambda functions"]
+    L -->|"CRUD operations"| D["Amazon DynamoDB todos table"]
+    A -.->|"Access metrics"| W["Amazon CloudWatch"]
+    L -.->|"Execution logs and metrics"| W
+{{< /mermaid >}}
 
-All operations are persisted in a database and accessed through HTTP endpoints.
+| Component | Workshop responsibility |
+|---|---|
+| API Gateway | Exposes `POST /todos`, `GET /todos`, `PUT /todos/{todoId}`, and `DELETE /todos/{todoId}` |
+| Lambda | Separates create, list, update, and delete handlers |
+| DynamoDB | Persists Todo items using `todoId` as the workshop key |
+| IAM | Allows Lambda to access the table and publish logs |
+| CloudWatch | Captures Lambda logs and service metrics for troubleshooting |
 
-### Real-World Use Cases
+## Learning Outcomes
 
-This architecture is used for:
-- **Microservices**: Building independent, scalable services
-- **Content Management Systems**: APIs for blogs, newsletters
-- **Mobile Backends**: Serving data to mobile applications
-- **IoT Dashboards**: Collecting and serving sensor data
-- **E-commerce**: Product catalogs, order management
+After completing the workshop, a learner should be able to:
 
----
+- Explain the synchronous request flow and service responsibilities.
+- Create and test four CRUD routes.
+- Validate success and failure responses with Postman.
+- Locate Lambda and API metrics in CloudWatch.
+- Explain why IAM roles should be scoped to required actions and resources.
+- Remove all workshop resources and confirm cleanup.
 
-## Architecture at a Glance
+## Definition of Done for the Workshop
 
-```
-Client (Postman/Browser)
-    ↓
-API Gateway (HTTP Endpoint)
-    ↓
-Lambda Functions (Business Logic)
-    ↓
-DynamoDB (Data Storage)
-```
+- [ ] Each endpoint returns the documented status code for its happy path.
+- [ ] Invalid or incomplete requests produce controlled 4xx responses.
+- [ ] Lambda logs contain a request identifier without exposing credentials.
+- [ ] IAM policy scope is reviewed before testing.
+- [ ] Test evidence records request, response, timestamp, and result.
+- [ ] Cleanup verification confirms that billable workshop resources are removed.
 
-### 3 Key AWS Services
+## Important Production Limitations
 
-1. **API Gateway**: Creates REST API endpoints that clients can call
-2. **Lambda**: Serverless functions that handle request logic (CRUD operations)
-3. **DynamoDB**: NoSQL database for storing todo items
+The workshop instructions use manual console configuration and a simplified table key. As written, they do **not** prove production readiness. Before production use, the following changes are mandatory:
 
----
+1. Enforce Cognito JWT authorization and per-user ownership.
+2. Replace DynamoDB `Scan` with a paginated, per-user `Query` data model.
+3. Move all resources and IAM policies into AWS SAM/CloudFormation.
+4. Add input schemas, safe error handling, controlled CORS, throttling, alarms, and finite log retention.
+5. Enable DynamoDB point-in-time recovery and test restore and rollback.
+6. Run automated security, negative, performance, and deployment tests.
 
-## Why This Stack?
+See [Solution Architecture and Production Readiness](../../2-Proposal/) for the target design, Well-Architected assessment, risks, SLOs, and acceptance gates.
 
-| Service | Why Use It |
-|---------|-----------|
-| **API Gateway** | Provides public HTTP endpoints, handles routing, manages traffic |
-| **Lambda** | Pay-per-use pricing, automatic scaling, no server management |
-| **DynamoDB** | Fully managed NoSQL database, auto-scaling, millisecond latency |
+## Workshop Sequence
 
----
+1. Review prerequisites, account safety, permissions, and budget controls.
+2. Create the DynamoDB workshop table.
+3. Create and test the Lambda handlers.
+4. Configure API Gateway routes and validate the API.
+5. Inspect CloudWatch telemetry and record evidence.
+6. Delete resources and verify cleanup.
 
-## What You'll Learn
-
-- ✅ Create a DynamoDB table with proper key schema
-- ✅ Write Python Lambda functions for CRUD operations
-- ✅ Set up API Gateway to route HTTP requests to Lambda
-- ✅ Test API endpoints using Postman
-- ✅ Monitor with CloudWatch Logs
-- ✅ Implement IAM roles and Least Privilege security
-- ✅ Deploy using Infrastructure as Code (CloudFormation)
-- ✅ Clean up resources properly
-
----
-
-## Expected Outcomes
-
-After this workshop, you will have:
-- A fully functional Serverless Todo API on AWS
-- Understanding of serverless architecture benefits
-- Hands-on experience with 3 AWS core services
-- Knowledge of REST API design principles
-- A working, scalable application 
-
+The value of this workshop is not the number of services used; it is the ability to explain the design decisions, reproduce the deployment, test failure behavior, and identify what must change for production.

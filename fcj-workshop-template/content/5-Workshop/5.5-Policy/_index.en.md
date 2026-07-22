@@ -209,7 +209,7 @@ No content
 
 ✅ **Lambda**
 - Invocations: Should match API calls
-- Duration: Typically < 100ms
+- Duration: Record the measured baseline and investigate regressions or execution time approaching the configured timeout
 - Errors: Should be 0
 
 ✅ **DynamoDB**

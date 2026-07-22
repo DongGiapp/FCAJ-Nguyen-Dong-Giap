@@ -1,44 +1,49 @@
 ---
 title: "Internship Report"
-date: 2024-01-01
+date: 2026-07-22
 weight: 1
 chapter: false
 ---
 
-    
-# Internship Report
+# Cloud Engineering Internship Report
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
+## Candidate Profile
+
+| Field | Information |
+|---|---|
+| Full name | Nguyen Dong Giap |
+| University | Ho Chi Minh City University of Technology (HUTECH) |
+| Major / Class | Information Technology / 22DTHC2 |
+| Internship organization | Amazon Web Services Vietnam Co., Ltd. |
+| Internship role | Cloud Engineer Intern |
+| Internship period | 17 April–10 July 2026 |
+
+![Nguyen Dong Giap](/images/avatar.jpg)
+
+## Report Purpose
+
+This report documents a 12-week cloud engineering learning journey and the design of a **Serverless Todo API on AWS**. The report is evidence-oriented: it distinguishes implemented workshop work from production target architecture and evaluates the remaining gaps against the AWS Well-Architected Framework and Serverless Applications Lens.
+
+## Project Snapshot
+
+| Area | Summary |
+|---|---|
+| Business capability | Authenticated users manage their own Todo items through a REST API |
+| Core AWS services | Amazon API Gateway, AWS Lambda, Amazon DynamoDB |
+| Target controls | Amazon Cognito, least-privilege IAM, CloudWatch observability, DynamoDB PITR, Infrastructure as Code |
+| Current evidence | CRUD workshop, API tests, weekly worklog, architecture review and deployment documentation |
+| Current status | Workshop baseline completed; production readiness gaps documented and prioritized |
+
+## Report Structure
+
+1. [Worklog](1-Worklog/) — weekly objectives, completed activities, evidence, outcomes, and lessons learned.
+2. [Solution Architecture](2-Proposal/) — current state, target architecture, Well-Architected assessment, risk register, and production gates.
+3. [Translated Blogs](3-BlogsTranslated/) — technical research and summaries.
+4. [Events Participated](4-EventParticipated/) — community participation and learning outcomes.
+5. [Workshop](5-Workshop/) — reproducible implementation of the CRUD baseline.
+6. [Self-assessment](6-Self-evaluation/) — capabilities gained and improvement plan.
+7. [Sharing and Feedback](7-Feedback/) — program evaluation and recommendations.
+
+{{% notice info %}}
+The English version is the default report. Use the language selector in the navigation menu to open the corresponding Vietnamese page.
 {{% /notice %}}
-
-### Student Information:
-&emsp; **Full Name:** Nguyễn Đông Giáp
-
-&emsp; **Phone Number:** 0399005730 
-
-&emsp; **Email:** nguyendonggiappro@gmail.com
-
-&emsp; **University:** Đại học Công nghệ TP.HCM (HUTECH)
-
-&emsp; **Major:** Information Technology
-
-&emsp; **Class:** 22DTHC2
-
-&emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
-
-&emsp; **Internship Position:** Cloud Engineer Intern
-
-&emsp; **Internship Duration:** From 17/04/2026 to 10/07/2026
-
-![Nguyen Dong Giap's profile picture](/images/avatar.jpg)
-
-### Report Content
-
-1.  [Worklog](1-Worklog/)
-2.  [Proposal](2-Proposal/)
-3.  [Translated Blogs](3-BlogsTranslated/)
-4.  [Events Participated](4-EventParticipated/)
-5.  [Workshop](5-Workshop/)
-6.  [Self-evaluation](6-Self-evaluation/)
-7.  [Sharing and Feedback](7-Feedback/)

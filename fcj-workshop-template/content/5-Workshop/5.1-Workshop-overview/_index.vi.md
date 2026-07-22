@@ -1,86 +1,76 @@
-﻿---
-title: "Giới thiệu"
-date: 2024-01-01
+---
+title: "Phạm vi và kiến trúc workshop"
+date: 2026-07-22
 weight: 1
 chapter: false
 pre: " <b> 5.1. </b> "
 ---
 
-# Serverless Todo API trên AWS
+# Workshop Serverless Todo API
 
-## Tổng quan
+## Mục đích
 
-Trong workshop này, bạn sẽ xây dựng một **API Ứng dụng Todo Serverless** sử dụng các dịch vụ AWS. Đây là một bài tập thực tế để minh họa cách tạo một backend hiện đại, có thể mở rộng mà không cần quản lý máy chủ.
+Workshop minh họa request path tối thiểu của một serverless CRUD API: API Gateway nhận HTTP request, Lambda xử lý business logic và DynamoDB lưu kết quả. Đây là baseline học tập có thể triển khai, kiểm thử, quan sát và dọn dẹp trong một AWS account được kiểm soát.
 
-### Bạn sẽ xây dựng cái gì?
+## Baseline được triển khai
 
-Một API RESTful hoàn chỉnh cho ứng dụng Todo, nơi người dùng có thể:
-- Tạo các mục todo mới
-- Lấy tất cả todos
-- Cập nhật trạng thái todo
-- Xóa todos
+{{<mermaid align="center">}}
+flowchart LR
+    C["Postman hoặc API client"] -->|"HTTPS request"| A["Amazon API Gateway REST API"]
+    A -->|"Định tuyến theo method và path"| L["Bốn AWS Lambda functions"]
+    L -->|"CRUD operations"| D["Amazon DynamoDB todos table"]
+    A -.->|"Access metrics"| W["Amazon CloudWatch"]
+    L -.->|"Execution logs và metrics"| W
+{{< /mermaid >}}
 
-Tất cả các thao tác được lưu trữ trong cơ sở dữ liệu và truy cập qua các điểm cuối HTTP.
+| Thành phần | Trách nhiệm trong workshop |
+|---|---|
+| API Gateway | Cung cấp `POST /todos`, `GET /todos`, `PUT /todos/{todoId}` và `DELETE /todos/{todoId}` |
+| Lambda | Tách handler tạo, liệt kê, cập nhật và xóa |
+| DynamoDB | Lưu Todo với `todoId` làm khóa của workshop |
+| IAM | Cho phép Lambda truy cập bảng và xuất log |
+| CloudWatch | Thu thập Lambda log và service metric để xử lý sự cố |
 
-### Trường hợp sử dụng thực tế
+## Kết quả học tập
 
-Kiến trúc này được sử dụng cho:
-- **Microservices**: Xây dựng các dịch vụ độc lập, có thể mở rộng
-- **Web/Mobile Backends**: Phục vụ dữ liệu cho ứng dụng
-- **IoT Platforms**: Thu thập và phục vụ dữ liệu cảm biến
-- **E-commerce**: Quản lý danh mục sản phẩm
+Sau workshop, người học phải có khả năng:
 
----
+- Giải thích luồng request đồng bộ và trách nhiệm của từng dịch vụ.
+- Tạo và kiểm thử bốn CRUD route.
+- Kiểm tra phản hồi thành công và thất bại bằng Postman.
+- Tìm Lambda/API metric trong CloudWatch.
+- Giải thích vì sao IAM role phải giới hạn theo action và resource cần thiết.
+- Xóa toàn bộ tài nguyên workshop và xác nhận cleanup.
 
-## Kiến trúc tổng quan
+## Definition of Done của workshop
 
-```
-Client (Postman/Browser)
-    ↓
-API Gateway (HTTP Endpoint)
-    ↓
-Lambda Functions (Business Logic)
-    ↓
-DynamoDB (Data Storage)
-```
+- [ ] Mỗi endpoint trả đúng status code trong happy path.
+- [ ] Request sai hoặc thiếu tạo phản hồi 4xx có kiểm soát.
+- [ ] Lambda log có request ID nhưng không làm lộ credential.
+- [ ] IAM policy được review trước khi test.
+- [ ] Bằng chứng test ghi request, response, thời gian và kết quả.
+- [ ] Bước xác minh cleanup chứng minh tài nguyên tính phí đã được xóa.
 
-### 3 Dịch vụ AWS chính
+## Giới hạn production quan trọng
 
-1. **API Gateway**: Tạo các điểm cuối REST API mà client có thể gọi
-2. **Lambda**: Các hàm serverless xử lý logic yêu cầu (CRUD operations)
-3. **DynamoDB**: Cơ sở dữ liệu NoSQL để lưu trữ các mục todo
+Workshop đang dùng thao tác Console thủ công và key đơn giản. Với trạng thái này, tài liệu **không** chứng minh production readiness. Trước khi đưa vào production, bắt buộc phải:
 
----
+1. Bắt buộc Cognito JWT authorization và kiểm tra quyền sở hữu theo user.
+2. Thay DynamoDB `Scan` bằng data model `Query` theo user có pagination.
+3. Đưa toàn bộ resource và IAM policy vào AWS SAM/CloudFormation.
+4. Thêm input schema, error handling an toàn, CORS có kiểm soát, throttling, alarm và log retention hữu hạn.
+5. Bật DynamoDB point-in-time recovery; kiểm thử restore và rollback.
+6. Chạy tự động security, negative, performance và deployment test.
 
-## Tại sao chọn stack này?
+Xem [Kiến trúc giải pháp và Production Readiness](../../2-Proposal/) để đọc target design, Well-Architected assessment, risk, SLO và acceptance gate.
 
-| Dịch vụ | Tại sao sử dụng |
-|---------|-----------|
-| **API Gateway** | Cung cấp các điểm cuối HTTP công khai, định tuyến yêu cầu |
-| **Lambda** | Trả tiền theo lượng sử dụng, tự động mở rộng, không quản lý máy chủ |
-| **DynamoDB** | Cơ sở dữ liệu NoSQL được quản lý hoàn toàn, tự động mở rộng, độ trễ mili giây |
+## Trình tự workshop
 
----
+1. Kiểm tra prerequisite, an toàn tài khoản, permission và budget control.
+2. Tạo DynamoDB workshop table.
+3. Tạo và test Lambda handler.
+4. Cấu hình API Gateway route và kiểm tra API.
+5. Xem CloudWatch telemetry và lưu bằng chứng.
+6. Xóa tài nguyên và xác minh cleanup.
 
-## Bạn sẽ học được gì?
-
-- ✅ Tạo bảng DynamoDB với schema khóa phù hợp
-- ✅ Viết các hàm Lambda Python cho CRUD operations
-- ✅ Thiết lập API Gateway để định tuyến yêu cầu HTTP tới Lambda
-- ✅ Kiểm tra các điểm cuối API bằng Postman
-- ✅ Giám sát bằng CloudWatch Logs
-- ✅ Triển khai IAM roles và Least Privilege security
-- ✅ Deploy sử dụng Infrastructure as Code (CloudFormation)
-- ✅ Dọn dẹp tài nguyên một cách thích hợp
-
----
-
-## Kết quả dự kiến
-
-Sau khi hoàn thành workshop, bạn sẽ có:
-- Một API Todo Serverless hoạt động đầy đủ trên AWS
-- Hiểu biết về lợi ích của kiến trúc serverless
-- Kinh nghiệm thực tế với 3 dịch vụ AWS cốt lõi
-- Kiến thức về nguyên tắc thiết kế REST API
-- Một ứng dụng hoạt động, có thể mở rộng
-
+Giá trị của workshop không nằm ở số lượng dịch vụ, mà ở khả năng giải thích quyết định thiết kế, tái tạo triển khai, kiểm thử failure behavior và xác định thay đổi cần thiết cho production.

@@ -1,33 +1,45 @@
 ---
 title: "Worklog"
-date: 2024-01-01
+date: 2026-07-22
 weight: 1
 chapter: false
 pre: " <b> 1. </b> "
 ---
 
-During this period, I studied on [Cloud Journey](https://cloudjourney.awsstudygroup.com/), worked on my internship report, and participated in the group project **Serverless Workflow Engine** ([GitHub repository](https://github.com/cheduc1234/duan)). At first, many things were unfamiliar to me, but week by week I gradually understood more about AWS and how to work in a team.
+# Internship Worklog
 
-**Week 1:** [Getting familiar with FCJ, creating an AWS account, and learning basic IAM](1.1-week1/)
+## Scope and Evidence Standard
 
-**Week 2:** [Learning VPC, EC2, and S3 — my first time SSH into a server](1.2-week2/)
+This worklog records 12 weeks of AWS study, serverless API practice, technical writing, testing, and community participation. Each weekly entry is written in English and includes objectives, completed activities, outcomes, and reflection. Statements about deployment or functionality should be supported by a repository artifact, command output, test result, CloudWatch record, or screenshot with sensitive data removed.
 
-**Week 3:** [AWS CLI and DynamoDB — starting to think about the group project topic](1.3-week3/)
+{{% notice info %}}
+Learning an AWS service, implementing a feature, and operating it in production are different levels of evidence. The worklog uses those terms deliberately.
+{{% /notice %}}
 
-**Week 4:** [Writing the proposal and estimating AWS costs](1.4-week4/)
+## Weekly Milestones
 
-**Week 5:** [Learning Lambda and setting up the group coding environment](1.5-week5/)
+| Week | Focus | Deliverable or outcome |
+|---:|---|---|
+| [1](1.1-week1/) | AWS account and IAM fundamentals | Account setup and least-privilege concepts documented |
+| [2](1.2-week2/) | VPC, EC2, and S3 fundamentals | Core infrastructure learning notes and hands-on exercises |
+| [3](1.3-week3/) | AWS CLI and DynamoDB | CLI practice and initial data-store evaluation |
+| [4](1.4-week4/) | Proposal and cost assumptions | Initial scope, architecture, risks, and estimate |
+| [5](1.5-week5/) | Lambda development environment | Python handler setup and local development preparation |
+| [6](1.6-week6/) | AWS SAM and Infrastructure as Code | SAM/CloudFormation concepts studied; repository artifact still required for production evidence |
+| [7](1.7-week7/) | Lambda CRUD handlers | Create, list, update, and delete logic documented and tested at workshop level |
+| [8](1.8-week8/) | Cognito authentication | Identity concepts studied; authorization deployment evidence remains a production gap |
+| [9](1.9-week9/) | AWS deployment and CloudWatch | API testing and basic log/metric inspection |
+| [10](1.10-week10/) | Retesting and technical translation | API regression checks and translated cloud articles |
+| [11](1.11-week11/) | Workshop documentation and events | Reproducible instructions and community learning notes |
+| [12](1.12-week12/) | Cleanup and final review | Resource cleanup, report completion, and architecture gap assessment |
 
-**Week 6:** [Learning SAM and writing my first template.yaml](1.6-week6/)
+## Workstreams
 
-**Week 7:** [Coding Lambda CRUD — many errors, but many lessons learned](1.7-week7/)
+- **Cloud fundamentals:** IAM, VPC, EC2, S3, AWS CLI, and cost awareness.
+- **Serverless engineering:** API Gateway, Lambda, DynamoDB, Cognito concepts, CloudWatch, and SAM concepts.
+- **Quality and operations:** API testing, troubleshooting, cleanup, documentation, and production-readiness review.
+- **Professional development:** Technical translation, event participation, written reflection, and bilingual communication.
 
-**Week 8:** [Integrating Cognito — the hardest authentication part for me](1.8-week8/)
+## Reviewer Traceability
 
-**Week 9:** [Deploying to AWS, running tests, and checking CloudWatch](1.9-week9/)
-
-**Week 10:** [Translating blogs and retesting the API with the team](1.10-week10/)
-
-**Week 11:** [Completing workshop documentation and joining events](1.11-week11/)
-
-**Week 12:** [Cleaning up AWS resources and completing the report](1.12-week12/)
+The detailed weekly pages provide the narrative record. The [Solution Architecture](../2-Proposal/) page records design decisions and unresolved risks. The [Workshop](../5-Workshop/) provides the implementation procedure. Production claims remain conditional until the readiness checklist has evidence.

@@ -1,40 +1,49 @@
 ---
 title: "Báo cáo thực tập"
-date: 2024-01-01
+date: 2026-07-22
 weight: 1
 chapter: false
 ---
 
-# Báo cáo thực tập
-### Thông tin sinh viên:
-&emsp; **Full Name:** Nguyễn Đông Giáp
+# Báo cáo thực tập Cloud Engineering
 
-&emsp; **Phone Number:** 0399005730 
+## Thông tin ứng viên
 
-&emsp; **Email:** nguyendonggiappro@gmail.com
+| Hạng mục | Thông tin |
+|---|---|
+| Họ và tên | Nguyễn Đông Giáp |
+| Trường | Đại học Công nghệ TP.HCM (HUTECH) |
+| Ngành / Lớp | Công nghệ thông tin / 22DTHC2 |
+| Đơn vị thực tập | Amazon Web Services Vietnam Co., Ltd. |
+| Vị trí | Cloud Engineer Intern |
+| Thời gian | 17/04–10/07/2026 |
 
-&emsp; **University:** Đại học Công nghệ TP.HCM (HUTECH)
+![Nguyễn Đông Giáp](/images/avatar.jpg)
 
-&emsp; **Major:** Information Technology
+## Mục đích báo cáo
 
-&emsp; **Class:** 22DTHC2
+Báo cáo ghi lại hành trình học Cloud Engineering trong 12 tuần và quá trình thiết kế **Serverless Todo API trên AWS**. Nội dung được trình bày theo bằng chứng: phân biệt phần workshop đã thực hiện với kiến trúc production mục tiêu, đồng thời đánh giá các khoảng trống theo AWS Well-Architected Framework và Serverless Applications Lens.
 
-&emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
+## Tổng quan dự án
 
-&emsp; **Internship Position:** Cloud Engineer Intern
+| Hạng mục | Tóm tắt |
+|---|---|
+| Năng lực nghiệp vụ | Người dùng đã xác thực quản lý Todo của chính mình qua REST API |
+| Dịch vụ AWS cốt lõi | Amazon API Gateway, AWS Lambda, Amazon DynamoDB |
+| Kiểm soát mục tiêu | Amazon Cognito, IAM least privilege, CloudWatch observability, DynamoDB PITR, Infrastructure as Code |
+| Bằng chứng hiện có | Workshop CRUD, kiểm thử API, worklog tuần, kiến trúc và tài liệu triển khai |
+| Trạng thái hiện tại | Hoàn thành baseline workshop; đã ghi nhận và ưu tiên các khoảng trống production readiness |
 
-&emsp; **Internship Duration:** From 17/04/2026 to 10/07/2026
+## Cấu trúc báo cáo
 
-![Ảnh đại diện Nguyễn Đông Giáp](/images/avatar.jpg)
+1. [Worklog](1-Worklog/) — mục tiêu, công việc, bằng chứng, kết quả và bài học từng tuần.
+2. [Kiến trúc giải pháp](2-Proposal/) — hiện trạng, kiến trúc mục tiêu, Well-Architected, risk register và production gates.
+3. [Các bài blog đã dịch](3-BlogsTranslated/) — nghiên cứu và tổng hợp kỹ thuật.
+4. [Các sự kiện đã tham gia](4-EventParticipated/) — hoạt động cộng đồng và kết quả học tập.
+5. [Workshop](5-Workshop/) — triển khai baseline CRUD có thể thực hiện lại.
+6. [Tự đánh giá](6-Self-evaluation/) — năng lực đạt được và kế hoạch cải thiện.
+7. [Chia sẻ và góp ý](7-Feedback/) — đánh giá chương trình và đề xuất.
 
-
-
-### Nội dung báo cáo
-
-1.  [Worklog](1-Worklog/)
-2.  [Proposal](2-Proposal/)
-3.  [Các bài blogs đã dịch](3-BlogsTranslated/)
-4.  [Các events đã tham gia](4-EventParticipated/)
-5.  [Workshop](5-Workshop/)
-6.  [Tự đánh giá](6-Self-evaluation/)
-7.  [Chia sẻ, đóng góp ý kiến](7-Feedback/)
+{{% notice info %}}
+Tiếng Anh là ngôn ngữ mặc định của báo cáo. Có thể dùng bộ chọn ngôn ngữ trong menu để mở trang tiếng Việt tương ứng.
+{{% /notice %}}
