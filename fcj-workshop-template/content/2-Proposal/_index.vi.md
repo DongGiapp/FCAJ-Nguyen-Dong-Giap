@@ -58,19 +58,9 @@ Việc phân biệt này giúp báo cáo không tuyên bố vượt quá bằng 
 
 ## 4. Kiến trúc mục tiêu
 
-{{<mermaid align="center">}}
-flowchart LR
-    U["Web, mobile hoặc API client"] -->|"1. Đăng nhập"| C["Amazon Cognito User Pool"]
-    C -->|"2. JWT"| U
-    U -->|"3. HTTPS + JWT"| A["Amazon API Gateway REST API"]
-    A -->|"4. Xác thực và định tuyến"| L["AWS Lambda functions"]
-    L -->|"5. Query hoặc conditional write"| D["Amazon DynamoDB"]
-    A -.->|"Access log và metric"| O["Amazon CloudWatch"]
-    L -.->|"Structured log, metric, trace"| O
-    I["AWS SAM / CloudFormation pipeline"] -->|"Triển khai có version"| A
-    I -->|"Triển khai có version"| L
-    I -->|"Quản lý cấu hình"| D
-{{< /mermaid >}}
+![Sơ đồ kiến trúc AWS Enterprise Multi-AZ với phân đoạn mạng zero-trust](/images/2-Proposal/aws-enterprise-reference-architecture.png)
+
+*Hình 1 — Kiến trúc triển khai production tham chiếu: Route 53, CloudFront, WAF và Shield bảo vệ lớp biên; ALB phân phối lưu lượng đến ECS Fargate trên hai Availability Zone; Aurora và ElastiCache nằm trong các subnet dữ liệu cô lập; log, mã hóa, secrets và private endpoints được quản lý bằng các dịch vụ AWS.*
 
 ### Luồng request
 

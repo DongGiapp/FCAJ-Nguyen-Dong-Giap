@@ -58,19 +58,9 @@ This distinction prevents unsupported claims and gives reviewers a clear, audita
 
 ## 4. Target Architecture
 
-{{<mermaid align="center">}}
-flowchart LR
-    U["Web, mobile, or API client"] -->|"1. Sign in"| C["Amazon Cognito User Pool"]
-    C -->|"2. JWT"| U
-    U -->|"3. HTTPS + JWT"| A["Amazon API Gateway REST API"]
-    A -->|"4. Authorize and route"| L["AWS Lambda functions"]
-    L -->|"5. Query or conditional write"| D["Amazon DynamoDB"]
-    A -.->|"Access logs and metrics"| O["Amazon CloudWatch"]
-    L -.->|"Structured logs, metrics, traces"| O
-    I["AWS SAM / CloudFormation pipeline"] -->|"Versioned deployment"| A
-    I -->|"Versioned deployment"| L
-    I -->|"Managed configuration"| D
-{{< /mermaid >}}
+![AWS Enterprise Multi-AZ architecture with zero-trust network segmentation](/images/2-Proposal/aws-enterprise-reference-architecture.png)
+
+*Figure 1 — Production deployment reference architecture: Route 53, CloudFront, WAF, and Shield protect the edge; an ALB distributes traffic to ECS Fargate across two Availability Zones; Aurora and ElastiCache reside in isolated data subnets; logging, encryption, secrets, and private endpoints are provided by managed AWS services.*
 
 ### Request flow
 
